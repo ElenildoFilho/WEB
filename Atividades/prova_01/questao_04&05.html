@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification Card</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+        }
+
+        p {
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .notification-card {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .card-content {
+            margin-top: 10px;
+        }
+
+    </style>
+
+    <script>
+        function fecharCard() {
+            document.getElementById('card').style.display = 'none';
+        }
+    </script>
+
+</head>
+<body>
+    <div class="notification-card" id="card">
+        <div class="card-header">
+            <button class="close-btn" onclick="fecharCard()">X</button>
+        </div>
+        <div class="card-content">
+            <h3>Novidade!</h3>
+            <p>Confira nossos novos produtos.</p>
+        </div>
+    </div>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec...</p>
+
+
+    <script>
+        function fecharCard() {
+            document.getElementById('card').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela de Produtos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 3px solid #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+        thead {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        tbody tr:hover {
+            background-color: #e0f7fa;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome do Produto</th>
+                <th>Categoria</th>
+                <th>Preço (R$)</th>
+                <th>Estoque</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>01</td>
+                <td>Teclado Gamer</td>
+                <td>Periféricos</td>
+                <td>250,00</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Mouse Óptico</td>
+                <td>Periféricos</td>
+                <td>50,00</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td>Monitor 24"</td>
+                <td>Monitores</td>
+                <td>800,00</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>Processador i5</td>
+                <td>Processadores</td>
+                <td>1200,00</td>
+                <td>40</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
