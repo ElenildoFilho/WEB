@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de build / produção
+dist/
+build/
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Cache do npm
+.npm/
+
+# Outros arquivos temporários
+*.tmp
+*.temp
+
+# Arquivos gerados pelo bundler
+*.tgz
+
+# Diretórios temporários
+tmp/
+temp/

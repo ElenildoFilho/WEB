@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>COVID-19 - Países</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #eee; }
+    .brazil {
+      background-color: #ffd700;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>COVID-19 - Dados por País</h1>
+  <table id="countries-table">
+    <thead>
+      <tr>
+        <th>País</th>
+        <th>Casos Confirmados</th>
+        <th>Mortes</th>
+        <th>Recuperados</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    function formatNumber(value) {
+      if (value === null || value === undefined || isNaN(value)) {
+        return "N/A";
+      }
+      return Number(value).toLocaleString('pt-BR');
+    }
+
+    async function loadCountries() {
+      const response = await fetch("http://localhost:3000/api/paises");
+      const { data: countries } = await response.json();
+
+      const tbody = document.querySelector("#countries-table tbody");
+
+      countries.forEach(country => {
+        const row = document.createElement("tr");
+
+        if (country.country.toLowerCase() === "brazil") {
+          row.classList.add("brazil");
+        }
+
+        const cases = formatNumber(country.cases);
+        const deaths = formatNumber(country.deaths);
+        const recovered = formatNumber(country.recovered);
+
+        row.innerHTML = `
+          <td>${country.country}</td>
+          <td>${cases}</td>
+          <td>${deaths}</td>
+          <td>${recovered}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    loadCountries();
+  </script>
+</body>
+</html>

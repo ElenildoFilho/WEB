@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>COVID-19 - Estados Brasileiros</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #eee;
+    }
+    .above-average {
+      background-color: #ff4444;
+      color: white;
+      font-weight: bold;
+    }
+    .highest-ratio {
+      background-color: #00c851;
+      color: white;
+      font-weight: bold;
+    }
+    .lowest-ratio {
+      background-color: #33b5e5;
+      color: white;
+      font-weight: bold;
+    }
+    tfoot {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>COVID-19 por Estado</h1>
+  <table id="states-table">
+    <thead>
+      <tr>
+        <th>Estado</th>
+        <th>Abreviação</th>
+        <th>Número de Casos</th>
+        <th>Média de Suspeitos</th>
+        <th>Número de Falecimentos</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot></tfoot>
+  </table>
+
+  <script>
+    async function loadData() {
+      const response = await fetch("http://localhost:3000/api/estados");
+      const { data: states } = await response.json();
+
+      const tbody = document.querySelector("#states-table tbody");
+      const tfoot = document.querySelector("#states-table tfoot");
+
+      let totalCases = 0, totalSuspects = 0, totalDeaths = 0;
+
+      states.forEach(state => {
+        totalCases += state.cases;
+        totalSuspects += state.suspects;
+        totalDeaths += state.deaths;
+      });
+
+      const averageCases = totalCases / states.length;
+      const averageSuspects = totalSuspects / states.length;
+      const averageDeaths = totalDeaths / states.length;
+
+      let highestRatio = -Infinity, lowestRatio = Infinity;
+      let highestRatioUf = "", lowestRatioUf = "";
+
+      states.forEach(state => {
+        const ratio = state.deaths ? state.cases / state.deaths : Infinity;
+        if (ratio > highestRatio) {
+          highestRatio = ratio;
+          highestRatioUf = state.uf;
+        }
+        if (ratio < lowestRatio) {
+          lowestRatio = ratio;
+          lowestRatioUf = state.uf;
+        }
+      });
+
+      states.forEach(state => {
+        const row = document.createElement("tr");
+        row.dataset.uf = state.uf;
+
+        if (state.deaths > averageDeaths) row.classList.add("above-average");
+        if (state.uf === highestRatioUf) row.classList.add("highest-ratio");
+        if (state.uf === lowestRatioUf) row.classList.add("lowest-ratio");
+
+        row.innerHTML = `
+          <td>${state.state}</td>
+          <td>${state.uf}</td>
+          <td>${state.cases.toLocaleString('pt-BR')}</td>
+          <td>${state.suspects.toLocaleString('pt-BR')}</td>
+          <td>${state.deaths.toLocaleString('pt-BR')}</td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      tfoot.innerHTML = `
+        <tr>
+          <td colspan="2">Média</td>
+          <td>${averageCases.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+          <td>${averageSuspects.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+          <td>${averageDeaths.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        </tr>
+      `;
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
