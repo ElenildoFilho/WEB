@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo da Memória</title>
+  <style>
+    table { border-collapse: collapse; }
+    td { width: 100px; height: 100px; text-align: center; border: 1px solid #000; }
+    img { width: 90px; height: 90px; cursor: pointer; }
+    .oculta { visibility: hidden; }
+    .revelada { visibility: visible; }
+  </style>
+</head>
+<body onload="iniciarJogo()">
+  <h1>Jogo da Memória</h1>
+  <table id="tabuleiro"></table>
+
+  <script>
+    const imagens = [
+      "img1.png", "img1.png", "img2.png", "img2.png",
+      "img3.png", "img3.png", "img4.png", "img4.png",
+      "img5.png", "img5.png", "img6.png", "img6.png",
+      "img7.png", "img7.png", "img8.png", "img8.png"
+    ];
+
+    let primeira = null;
+    let segunda = null;
+    let pontos = 0;
+
+    function embaralhar(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function iniciarJogo() {
+      embaralhar(imagens);
+      const tabela = document.getElementById("tabuleiro");
+      let index = 0;
+
+      for (let i = 0; i < 4; i++) {
+        const linha = document.createElement("tr");
+        for (let j = 0; j < 4; j++) {
+          const celula = document.createElement("td");
+          const img = document.createElement("img");
+          img.src = imagens[index];
+          img.dataset.img = imagens[index];
+          img.className = "oculta";
+          img.onclick = revelar;
+          celula.appendChild(img);
+          linha.appendChild(celula);
+          index++;
+        }
+        tabela.appendChild(linha);
+      }
+    }
+
+    function revelar() {
+      if (this.className === "revelada" || segunda) return;
+
+      this.className = "revelada";
+
+      if (!primeira) {
+        primeira = this;
+      } else {
+        segunda = this;
+        if (primeira.dataset.img === segunda.dataset.img) {
+          pontos++;
+          primeira = null;
+          segunda = null;
+        } else {
+          setTimeout(() => {
+            primeira.className = "oculta";
+            segunda.className = "oculta";
+            primeira = null;
+            segunda = null;
+          }, 1000);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
